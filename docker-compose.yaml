@@ -1,0 +1,55 @@
+version: "3.5"
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - schema_registry
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - schema_registry
+    restart: unless-stopped
+
+  registry:
+    container_name: schema_registry
+    image: apicurio/apicurio-registry-sql:latest-snapshot
+    environment:
+      REGISTRY_DATASOURCE_URL: ${POSTGRES_URL:-jdbc:postgresql://postgres:5432/apicurio-registry}
+      REGISTRY_DATASOURCE_USERNAME: ${POSTGRES_USER:-postgres}
+      REGISTRY_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "${REGISTRY_PORT:-8888}:8080"
+    networks:
+      - schema_registry
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+
+networks:
+  schema_registry:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:

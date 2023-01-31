@@ -1,0 +1,3 @@
+apicurioregistryclient
+jsonschema
+python-dotenv
