@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "8bad74c8-20c4-43c9-afc5-297ead62c3b2",
+		"name": "local_apicurio_registry",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create json schema",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Registry-ArtifactType",
+						"value": "JSON",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-ArtifactId",
+						"value": "drivers_personal_info",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-Version",
+						"value": "1.0",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-Name",
+						"value": "drivers_personal_info",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-Description",
+						"value": "drivers personal information like name, age, address, ... etc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"properties\": {\n        \"age\": {\n            \"maximum\": 100,\n            \"minimum\": 0,\n            \"type\": \"number\"\n        },\n        \"created_on\": {\n            \"format\": \"date-time\",\n            \"type\": \"string\"\n        },\n        \"email\": {\n            \"format\": \"email\",\n            \"type\": \"string\"\n        },\n        \"mobile_number\": {\n            \"minLength\": 9,\n            \"pattern\": \"^[0-9]*$\",\n            \"type\": \"string\"\n        },\n        \"name\": {\n            \"maxLength\": 150,\n            \"minLength\": 2,\n            \"type\": \"string\"\n        }\n    },\n    \"required\": [\n        \"age\",\n        \"name\",\n        \"email\",\n        \"mobile_number\"\n    ],\n    \"type\": \"object\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/apis/registry/v2/groups/assist/artifacts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"apis",
+						"registry",
+						"v2",
+						"groups",
+						"assist",
+						"artifacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update schema rules - validity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"type\": \"VALIDITY\",\n\"config\": \"FULL\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/apis/registry/v2/groups/assist/artifacts/drivers_personal_info/rules",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"apis",
+						"registry",
+						"v2",
+						"groups",
+						"assist",
+						"artifacts",
+						"drivers_personal_info",
+						"rules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update schema rules - compatibility",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"type\": \"COMPATIBILITY\",\n\"config\": \"forward\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/apis/registry/v2/groups/assist/artifacts/drivers_personal_info/rules",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"apis",
+						"registry",
+						"v2",
+						"groups",
+						"assist",
+						"artifacts",
+						"drivers_personal_info",
+						"rules"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update json schema",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-Registry-ArtifactType",
+						"value": "JSON",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-ArtifactId",
+						"value": "drivers_personal_info",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-Version",
+						"value": "2.0",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-Name",
+						"value": "drivers_personal_info",
+						"type": "default"
+					},
+					{
+						"key": "X-Registry-Description",
+						"value": "drivers personal information like name, age, address, ... etc",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"properties\": {\n        \"age\": {\n            \"maximum\": 100,\n            \"minimum\": 16,\n            \"type\": \"number\"\n        },\n        \"created_on\": {\n            \"format\": \"date-time\",\n            \"type\": \"string\"\n        },\n        \"email\": {\n            \"format\": \"email\",\n            \"type\": \"string\"\n        },\n        \"mobile_number\": {\n            \"minLength\": 9,\n            \"pattern\": \"^[0-9]*$\",\n            \"type\": \"string\"\n        },\n        \"name\": {\n            \"maxLength\": 150,\n            \"minLength\": 2,\n            \"type\": \"string\"\n        },\n        \"address\": {\n            \"maxLength\": 300,\n            \"minLength\": 10,\n            \"type\": \"string\"\n        }\n    },\n    \"required\": [\n        \"age\",\n        \"name\",\n        \"email\",\n        \"mobile_number\"\n    ],\n    \"type\": \"object\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/apis/registry/v2/groups/assist/artifacts/drivers_personal_info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"apis",
+						"registry",
+						"v2",
+						"groups",
+						"assist",
+						"artifacts",
+						"drivers_personal_info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update schema version state",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"state\": \"ENABLED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/apis/registry/v2/groups/assist/artifacts/drivers_personal_info/versions/1.0/state",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"apis",
+						"registry",
+						"v2",
+						"groups",
+						"assist",
+						"artifacts",
+						"drivers_personal_info",
+						"versions",
+						"1.0",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update schema metadata",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"ev_drivers_personal_info\",\n  \"description\": \"ev drivers personal information like name, age, address, ... etc\",\n  \"labels\": [\n    \"assist\",\n    \"global\"\n  ],\n  \"properties\": {\n    \"category\": \"restricted\",\n    \"datalake\": \"true\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8888/apis/registry/v2/groups/assist/artifacts/drivers_personal_info/versions/1.0/meta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"apis",
+						"registry",
+						"v2",
+						"groups",
+						"assist",
+						"artifacts",
+						"drivers_personal_info",
+						"versions",
+						"1.0",
+						"meta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Schema versions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/apis/registry/v2/groups/assist/artifacts/drivers_personal_info/versions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"apis",
+						"registry",
+						"v2",
+						"groups",
+						"assist",
+						"artifacts",
+						"drivers_personal_info",
+						"versions"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
