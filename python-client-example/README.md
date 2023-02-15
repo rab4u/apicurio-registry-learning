@@ -3,7 +3,7 @@
 
 ## Requirements
 ```shell
-pip3 install -r python-client/requirements.txt
+pip3 install -r python-client-example/requirements.txt
 ```
 
 ## Environmental variables
@@ -13,5 +13,5 @@ export SERVICE_REGISTRY_URL="http://localhost:8888/apis/registry/v2"
 
 ## Run
 ```shell
-python3 python-client/json_validatory.py
+python3 python-client-example/json_validatory.py
 ```
